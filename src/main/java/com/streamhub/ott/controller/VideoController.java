@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.streamhub.ott.dto.VideoDTO;
 import com.streamhub.ott.security.RequiresSubscription;
 import com.streamhub.ott.service.VideoService;
+
+import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/videos")
 public class VideoController {
@@ -28,7 +30,7 @@ public class VideoController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')") // Only admins can add videos
-    public ResponseEntity<VideoDTO> createVideo(@RequestBody VideoDTO videoDTO) {
+    public ResponseEntity<VideoDTO> createVideo(@Valid @RequestBody VideoDTO videoDTO) {
         VideoDTO createdVideo = videoService.createVideo(videoDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(createdVideo);

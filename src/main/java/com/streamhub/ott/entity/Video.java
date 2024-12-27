@@ -30,11 +30,10 @@ public class Video {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
 
- @NotBlank
+ @NotBlank(message = "Title cannot be blank")
  @Column(nullable = false)
  private String title;
 
- @NotBlank
  @Column(nullable = false)
  private String description;
  
@@ -53,6 +52,6 @@ public class Video {
  private List<Watchlist> watchlist;
  
  @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
- private boolean isPublicTrailer;
+ private Boolean isPublicTrailer = false;
 
 }
