@@ -40,8 +40,9 @@ public class UserSubscription {
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
 
-    @Column(name = "next_renewal_date")
+    @Column(name = "next_renewal_date", nullable = false)
     private LocalDateTime nextRenewalDate;
+
 
     @Column(name = "is_auto_renew", nullable = false)
     private Boolean isAutoRenew;

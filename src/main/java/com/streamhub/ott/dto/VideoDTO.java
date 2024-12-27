@@ -15,6 +15,7 @@ public class VideoDTO {
     private Long id;
     private String title;
     private String description;
+    private String url;
     private Long genreId;
-    private boolean isPublicTrailer;
+    private Boolean isPublicTrailer;
 }

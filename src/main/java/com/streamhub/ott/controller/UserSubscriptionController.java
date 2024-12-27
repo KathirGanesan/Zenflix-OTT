@@ -26,7 +26,7 @@ public class UserSubscriptionController {
     private UserSubscriptionService userSubscriptionService;
 
     @PostMapping("/subscribe")
-    @PreAuthorize("hasRole('USER')") // Only users with the USER role can subscribe
+    @PreAuthorize("hasRole('ADMIN') or #userSubscriptionDTO.userId == principal.id") // Only users with the USER role can subscribe
     public ResponseEntity<UserSubscriptionDTO> userSubscribe(@RequestBody UserSubscriptionDTO userSubscriptionDTO) {
         UserSubscriptionDTO createdSubscription = userSubscriptionService.userSubscribe(userSubscriptionDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -56,10 +56,11 @@ public class UserSubscriptionController {
     }
 
     @PatchMapping("/{id}/toggle-autorenew")
-    @PreAuthorize("#id == principal.id") // Only admins or the user themselves
+    @PreAuthorize("hasRole('ADMIN') or @userSubscriptionService.isOwner(#id, principal.id)")
     public ResponseEntity<UserSubscriptionDTO> toggleAutoRenew(@PathVariable Long id) {
         UserSubscriptionDTO updatedSubscription = userSubscriptionService.toggleAutoRenew(id);
         return ResponseEntity.ok(updatedSubscription);
     }
+
 }
 

@@ -55,6 +55,8 @@ public class VideoServiceImpl implements VideoService {
             .orElseThrow(() -> new ResourceNotFoundException("Video not found"));
         existingVideo.setTitle(videoDTO.getTitle());
         existingVideo.setDescription(videoDTO.getDescription());
+        existingVideo.setUrl(videoDTO.getUrl());
+        existingVideo.setIsPublicTrailer(videoDTO.getIsPublicTrailer());
         Video updatedVideo = videoRepository.save(existingVideo);
         return videoMapper.toDTO(updatedVideo);
     }

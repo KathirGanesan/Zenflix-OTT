@@ -71,7 +71,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     private UserSubscriptionDTO createNewSubscription(User user, Subscription subscription, LocalDateTime startDate, Boolean isAutoRenew) {
         LocalDateTime endDate = startDate.plusMonths(subscription.getDurationMonths());
-        LocalDateTime nextRenewalDate = endDate.plusDays(1);
+        LocalDateTime nextRenewalDate = endDate;
 
         // Create payment entry
         Payment payment = new Payment();
@@ -107,7 +107,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     
     private UserSubscriptionDTO queueNewSubscription(User user, Subscription subscription, LocalDateTime startDate, Boolean isAutoRenew) {
         LocalDateTime endDate = startDate.plusMonths(subscription.getDurationMonths());
-        LocalDateTime nextRenewalDate = endDate.plusDays(1);
+        LocalDateTime nextRenewalDate = endDate;
 
         // Create user subscription entry
         UserSubscription userSubscription = new UserSubscription();
@@ -203,6 +203,10 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
         return userSubscriptionMapper.toDTO(updatedSubscription);
     }
 
-    
+    public boolean isOwner(Long userSubscriptionId, Long userId) {
+        return userSubscriptionRepository.findById(userSubscriptionId)
+                .map(subscription -> subscription.getUser().getId().equals(userId))
+                .orElse(false);
+    }
 
 }

@@ -17,6 +17,8 @@ public class VideoMapper {
         videoDTO.setTitle(video.getTitle());
         videoDTO.setDescription(video.getDescription());
         videoDTO.setGenreId(video.getGenre() != null ? video.getGenre().getId() : null);
+        videoDTO.setIsPublicTrailer(video.getIsPublicTrailer());
+        videoDTO.setUrl(video.getUrl());
         return videoDTO;
     }
 
@@ -29,6 +31,8 @@ public class VideoMapper {
         video.setTitle(videoDTO.getTitle());
         video.setDescription(videoDTO.getDescription());
         video.setGenre(genre);
+        video.setIsPublicTrailer(videoDTO.getIsPublicTrailer());
+        video.setUrl(videoDTO.getUrl());
         video.setDeleted(false);
         return video;
     }

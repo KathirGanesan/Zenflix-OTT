@@ -13,11 +13,12 @@ import com.streamhub.ott.entity.UserSubscription;
 @Repository
 public interface UserSubscriptionRepository extends JpaRepository<UserSubscription, Long> {
 
-    List<UserSubscription> findByIsAutoRenewTrueAndNextRenewalDateBefore(LocalDateTime currentDate);
-    boolean existsByUserAndSubscription(User user, Subscription subscription);
+    List<UserSubscription> findByIsAutoRenewTrueAndNextRenewalDateLessThanEqual(LocalDateTime currentDate);
+    Boolean existsByUserAndSubscription(User user, Subscription subscription);
     UserSubscription findByUserAndActiveTrue(User user);
     UserSubscription findFirstByUserAndActiveFalseOrderByStartDateAsc(User user);
     List<UserSubscription> findAllByActiveTrue();
-    boolean existsByUserIdAndActiveTrue(Long userId);
+    Boolean existsByUserIdAndActiveTrue(Long userId);
+    Boolean existsByUser_EmailAndActiveTrue(String email);
 
 }
