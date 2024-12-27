@@ -8,11 +8,11 @@
 		<version>3.4.0</version>
 		<relativePath />
 	</parent>
-	<groupId>com.streamhub</groupId>
-	<artifactId>ott-platform</artifactId>
+	<groupId>com.zenflix</groupId>
+	<artifactId>zenflix</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ott-platform</name>
-	<description>An OTT app</description>
+	<name>ZenFlix</name>
+	<description>ZenFlix OTT app</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
