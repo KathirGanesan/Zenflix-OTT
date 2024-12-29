@@ -27,7 +27,11 @@ public class UserMapper {
                 .map(role -> role.getName()) // Extract role names
                 .collect(Collectors.toList())
         );
-
+        // Map auditable fields
+        userDTO.setCreatedAt(user.getCreatedAt());
+        userDTO.setCreatedBy(user.getCreatedBy());
+        userDTO.setModifiedAt(user.getModifiedAt());
+        userDTO.setModifiedBy(user.getModifiedBy());
         return userDTO;
     }
 
@@ -67,7 +71,11 @@ public class UserMapper {
                 .map(role -> role.getName())
                 .collect(Collectors.toList())
         );
-
+        // Map auditable fields
+        userResponseDTO.setCreatedAt(user.getCreatedAt());
+        userResponseDTO.setCreatedBy(user.getCreatedBy());
+        userResponseDTO.setModifiedAt(user.getModifiedAt());
+        userResponseDTO.setModifiedBy(user.getModifiedBy());
         return userResponseDTO;
     }
 

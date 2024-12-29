@@ -22,6 +22,11 @@ public class PaymentMapper {
         paymentDTO.setPaymentStatus(payment.getPaymentStatus().name());
         paymentDTO.setTransactionDate(payment.getTransactionDate());
         paymentDTO.setTransactionId(payment.getTransactionId());
+        // Map auditable fields
+        paymentDTO.setCreatedAt(payment.getCreatedAt());
+        paymentDTO.setCreatedBy(payment.getCreatedBy());
+        paymentDTO.setModifiedAt(payment.getModifiedAt());
+        paymentDTO.setModifiedBy(payment.getModifiedBy());
         return paymentDTO;
     }
 

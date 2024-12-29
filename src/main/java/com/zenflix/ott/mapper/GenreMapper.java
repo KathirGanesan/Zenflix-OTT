@@ -15,6 +15,11 @@ public class GenreMapper {
         genreDTO.setId(genre.getId());
         genreDTO.setName(genre.getName());
         genreDTO.setDeleted(genre.getDeleted());    
+        // Map auditable fields
+        genreDTO.setCreatedAt(genre.getCreatedAt());
+        genreDTO.setCreatedBy(genre.getCreatedBy());
+        genreDTO.setModifiedAt(genre.getModifiedAt());
+        genreDTO.setModifiedBy(genre.getModifiedBy());
         return genreDTO;
     }
 

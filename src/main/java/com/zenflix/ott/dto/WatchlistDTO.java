@@ -1,4 +1,6 @@
 package com.zenflix.ott.dto;
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +16,9 @@ public class WatchlistDTO {
     private Long id;
     private Long userId;
     private Long videoId;
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 }

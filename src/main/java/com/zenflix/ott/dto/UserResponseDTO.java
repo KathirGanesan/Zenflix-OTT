@@ -1,5 +1,6 @@
 package com.zenflix.ott.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,10 @@ public class UserResponseDTO {
     private String email;
     private List<String> roles;
     private Boolean deleted;
-
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 
 }

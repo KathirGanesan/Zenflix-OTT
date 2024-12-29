@@ -16,6 +16,11 @@ public class WatchlistMapper {
         watchlistDTO.setId(watchlist.getId());
         watchlistDTO.setUserId(watchlist.getUser() != null ? watchlist.getUser().getId() : null);
         watchlistDTO.setVideoId(watchlist.getVideo() != null ? watchlist.getVideo().getId() : null);
+        // Map auditable fields
+        watchlistDTO.setCreatedAt(watchlist.getCreatedAt());
+        watchlistDTO.setCreatedBy(watchlist.getCreatedBy());
+        watchlistDTO.setModifiedAt(watchlist.getModifiedAt());
+        watchlistDTO.setModifiedBy(watchlist.getModifiedBy());  
         return watchlistDTO;
     }
 

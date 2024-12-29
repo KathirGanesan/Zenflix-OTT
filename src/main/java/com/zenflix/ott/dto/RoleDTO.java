@@ -1,5 +1,7 @@
 package com.zenflix.ott.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,9 @@ public class RoleDTO {
     private Long id;
     private String name;
     private Boolean deleted;
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 }
