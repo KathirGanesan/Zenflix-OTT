@@ -25,4 +25,9 @@ public class UserSubscriptionDTO {
     private BigDecimal paymentAmount;
     private String transactionId;
     private String paymentStatusMessage; 
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 }

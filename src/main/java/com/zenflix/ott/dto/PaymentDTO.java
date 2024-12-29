@@ -22,6 +22,10 @@ public class PaymentDTO {
     private String paymentStatus;
     private LocalDateTime transactionDate;
     private String transactionId;
-
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 
 }

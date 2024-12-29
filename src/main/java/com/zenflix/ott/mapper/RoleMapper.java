@@ -13,6 +13,11 @@ public class RoleMapper {
         roleDTO.setId(role.getId());
         roleDTO.setName(role.getName());
         roleDTO.setDeleted(role.getDeleted()); // Map deleted field
+        // Map auditable fields
+        roleDTO.setCreatedAt(role.getCreatedAt());
+        roleDTO.setCreatedBy(role.getCreatedBy());
+        roleDTO.setModifiedAt(role.getModifiedAt());
+        roleDTO.setModifiedBy(role.getModifiedBy());
         return roleDTO;
     }
 

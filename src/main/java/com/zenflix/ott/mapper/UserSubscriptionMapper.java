@@ -19,6 +19,11 @@ public class UserSubscriptionMapper {
         dto.setEndDate(userSubscription.getEndDate());
         dto.setNextRenewalDate(userSubscription.getNextRenewalDate());
         dto.setIsAutoRenew(userSubscription.getIsAutoRenew());
+        // Map auditable fields
+        dto.setCreatedAt(userSubscription.getCreatedAt());
+        dto.setCreatedBy(userSubscription.getCreatedBy());
+        dto.setModifiedAt(userSubscription.getModifiedAt());
+        dto.setModifiedBy(userSubscription.getModifiedBy());
         return dto;
     }
 

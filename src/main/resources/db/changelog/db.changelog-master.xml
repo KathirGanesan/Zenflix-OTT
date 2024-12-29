@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+	<!-- Create Roles Table -->
+	<changeSet author="kathir-ganesan" id="add-roles-table">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="roles" />
+			</not>
+		</preConditions>
+		<comment>Adds the roles table to manage user roles</comment>
+		<createTable tableName="roles">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="roles_pkey" />
+			</column>
+			<column name="name" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="deleted" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="created_by" type="VARCHAR(255)" />
+			<column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="modified_by" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<!-- Create Subscriptions Table -->
+	<changeSet author="kathir-ganesan" id="add-subscriptions-table">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="subscriptions" />
+			</not>
+		</preConditions>
+		<comment>Adds the subscriptions table to manage subscription plans</comment>
+		<createTable tableName="subscriptions">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="subscriptions_pkey" />
+			</column>
+			<column name="plan_name" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="duration_months" type="INTEGER">
+				<constraints nullable="false" />
+			</column>
+			<column name="price" type="NUMERIC(10, 2)">
+				<constraints nullable="false" />
+			</column>
+			<column name="deleted" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="created_by" type="VARCHAR(255)" />
+			<column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="modified_by" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<!-- Create Users Table -->
+	<changeSet author="kathir-ganesan" id="add-users-table">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="users" />
+			</not>
+		</preConditions>
+		<comment>Adds the users table</comment>
+		<createTable tableName="users">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="users_pkey" />
+			</column>
+			<column name="username" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="password" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="deleted" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="created_by" type="VARCHAR(255)" />
+			<column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="modified_by" type="VARCHAR(255)" />
+		</createTable>
+	</changeSet>
+
+	<!-- Create User Subscription Table -->
+	<changeSet author="kathir-ganesan" id="add-user-subscription-table">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="user_subscription" />
+			</not>
+		</preConditions>
+		<comment>Adds the user subscription table</comment>
+		<createTable tableName="user_subscription">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="user_subscription_pkey" />
+			</column>
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="subscription_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE">
+				<constraints nullable="false" />
+			</column>
+			<column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE">
+				<constraints nullable="false" />
+			</column>
+			<column name="next_renewal_date" type="TIMESTAMP WITHOUT TIME ZONE">
+				<constraints nullable="false" />
+			</column>
+			<column name="is_auto_renew" type="BOOLEAN">
+				<constraints nullable="false" />
+			</column>
+			<column name="active" type="BOOLEAN" defaultValue="true">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="created_by" type="VARCHAR(255)" />
+			<column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE" />
+			<column name="modified_by" type="VARCHAR(255)" />
+		</createTable>
+		<addForeignKeyConstraint baseTableName="user_subscription"
+			baseColumnNames="user_id"
+			referencedTableName="users" referencedColumnNames="id"
+			constraintName="fk_user_subscription_user" />
+		<addForeignKeyConstraint baseTableName="user_subscription"
+			baseColumnNames="subscription_id"
+			referencedTableName="subscriptions" referencedColumnNames="id"
+			constraintName="fk_user_subscription_subscription" />
+	</changeSet>
+	<!-- ChangeSet for Videos Table -->
+	<changeSet id="create-videos-table" author="kathir-ganesan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="videos" />
+			</not>
+		</preConditions>
+		<comment>Create the 'videos' table to store video metadata</comment>
+		<createTable tableName="videos">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="title" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="TEXT">
+				<constraints nullable="false" />
+			</column>
+			<column name="url" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="genre_id" type="BIGINT">
+				<constraints nullable="true" />
+			</column>
+			<column name="is_public_trailer" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="deleted" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint
+			baseTableName="videos"
+			baseColumnNames="genre_id"
+			referencedTableName="genres"
+			referencedColumnNames="id"
+			constraintName="fk_videos_genre" />
+		<addUniqueConstraint
+			tableName="videos"
+			columnNames="url"
+			constraintName="uk_videos_url" />
+	</changeSet>
+
+	<!-- ChangeSet for Payments Table -->
+	<changeSet id="create-payments-table" author="kathir-ganesan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="payments" />
+			</not>
+		</preConditions>
+		<comment>Create the 'payments' table to track payment transactions</comment>
+		<createTable tableName="payments">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="subscription_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount" type="DECIMAL(38, 2)">
+				<constraints nullable="false" />
+			</column>
+			<column name="payment_status" type="VARCHAR(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="transaction_date" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="transaction_id" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="created_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint
+			baseTableName="payments"
+			baseColumnNames="user_id"
+			referencedTableName="users"
+			referencedColumnNames="id"
+			constraintName="fk_payments_user" />
+		<addForeignKeyConstraint
+			baseTableName="payments"
+			baseColumnNames="subscription_id"
+			referencedTableName="subscriptions"
+			referencedColumnNames="id"
+			constraintName="fk_payments_subscription" />
+	</changeSet>
+
+	<!-- ChangeSet for Watchlists Table -->
+	<changeSet id="create-watchlists-table" author="kathir-ganesan">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="watchlists" />
+			</not>
+		</preConditions>
+		<comment>Create the 'watchlists' table to store user video watchlists</comment>
+		<createTable tableName="watchlists">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="video_id" type="BIGINT">
+				<constraints nullable="false" />
+			</column>
+			<column name="deleted" type="BOOLEAN" defaultValue="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_at" type="TIMESTAMP">
+				<constraints nullable="false" />
+			</column>
+			<column name="modified_by" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint
+			baseTableName="watchlists"
+			baseColumnNames="user_id"
+			referencedTableName="users"
+			referencedColumnNames="id"
+			constraintName="fk_watchlists_user" />
+		<addForeignKeyConstraint
+			baseTableName="watchlists"
+			baseColumnNames="video_id"
+			referencedTableName="videos"
+			referencedColumnNames="id"
+			constraintName="fk_watchlists_video" />
+	</changeSet>
+
+<include file="db.changelog-auditing-defaults.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

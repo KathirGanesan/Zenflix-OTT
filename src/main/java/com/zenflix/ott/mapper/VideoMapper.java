@@ -19,6 +19,11 @@ public class VideoMapper {
         videoDTO.setGenreId(video.getGenre() != null ? video.getGenre().getId() : null);
         videoDTO.setIsPublicTrailer(video.getIsPublicTrailer());
         videoDTO.setUrl(video.getUrl());
+        // Map auditable fields
+        videoDTO.setCreatedAt(video.getCreatedAt());
+        videoDTO.setCreatedBy(video.getCreatedBy());
+        videoDTO.setModifiedAt(video.getModifiedAt());
+        videoDTO.setModifiedBy(video.getModifiedBy());    
         return videoDTO;
     }
 

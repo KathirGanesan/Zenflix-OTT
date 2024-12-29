@@ -1,5 +1,6 @@
 package com.zenflix.ott.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,4 +21,9 @@ public class UserDTO {
     private String password; // For creating/updating users
     private List<String> roles; // Role names like ROLE_USER, ROLE_ADMIN
     private Boolean deleted;
+    // Auditable fields
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime modifiedAt;
+    private String modifiedBy;
 }

@@ -10,13 +10,18 @@ import com.zenflix.ott.entity.Subscription;
 public class SubscriptionMapper {
  public SubscriptionDTO toDTO(Subscription subscription) {
      if (subscription == null) return null;
-     SubscriptionDTO dto = new SubscriptionDTO();
-     dto.setId(subscription.getId());
-     dto.setPlanName(subscription.getPlanName());
-     dto.setDurationMonths(subscription.getDurationMonths());
-     dto.setPrice(subscription.getPrice());
-     dto.setDeleted(subscription.getDeleted());
-     return dto;
+     SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
+     subscriptionDTO.setId(subscription.getId());
+     subscriptionDTO.setPlanName(subscription.getPlanName());
+     subscriptionDTO.setDurationMonths(subscription.getDurationMonths());
+     subscriptionDTO.setPrice(subscription.getPrice());
+     subscriptionDTO.setDeleted(subscription.getDeleted());
+     // Map auditable fields
+     subscriptionDTO.setCreatedAt(subscription.getCreatedAt());
+     subscriptionDTO.setCreatedBy(subscription.getCreatedBy());
+     subscriptionDTO.setModifiedAt(subscription.getModifiedAt());
+     subscriptionDTO.setModifiedBy(subscription.getModifiedBy());
+     return subscriptionDTO;
  }
 
  public Subscription toEntity(SubscriptionDTO dto) {
