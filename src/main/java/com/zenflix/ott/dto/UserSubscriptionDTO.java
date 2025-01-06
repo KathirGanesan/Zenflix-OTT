@@ -3,6 +3,7 @@ package com.zenflix.ott.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,12 +17,19 @@ import lombok.ToString;
 @ToString	
 public class UserSubscriptionDTO {
     private Long id;
+    
+    @NotNull(message = "User ID is required")
     private Long userId;
+    
+    @NotNull(message = "Subscription ID is required")
     private Long subscriptionId;
+    
+    @NotNull(message = "Auto-renew status must be specified")
+    private Boolean isAutoRenew;
+    
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime nextRenewalDate;
-    private Boolean isAutoRenew;
     private BigDecimal paymentAmount;
     private String transactionId;
     private String paymentStatusMessage; 

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zenflix.ott.dto.RoleDTO;
 import com.zenflix.ott.service.RoleService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/roles")
 public class RoleController {
@@ -27,7 +29,7 @@ public class RoleController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')") // Only admins can create roles
-    public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO roleDTO) {
+    public ResponseEntity<RoleDTO> createRole(@Valid @RequestBody RoleDTO roleDTO) {
         RoleDTO createdRole = roleService.createRole(roleDTO);
         return ResponseEntity.status(201)
                 .body(createdRole);
@@ -37,7 +39,7 @@ public class RoleController {
     @PreAuthorize("hasRole('ADMIN')") // Only admins can update roles
     public ResponseEntity<RoleDTO> updateRole(
             @PathVariable Long roleId,
-            @RequestBody RoleDTO roleDTO
+            @Valid @RequestBody RoleDTO roleDTO
     ) {
         RoleDTO updatedRole = roleService.updateRole(roleId, roleDTO);
         return ResponseEntity.ok(updatedRole);

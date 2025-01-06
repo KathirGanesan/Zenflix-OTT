@@ -48,6 +48,14 @@ public class VideoServiceImpl implements VideoService {
             .map(videoMapper::toDTO)
             .collect(Collectors.toList());
     }
+    
+    @Override
+    public List<VideoDTO> getVideosByGenre(Long genreId) {
+        List<Video> videos = videoRepository.findByGenreIdAndDeletedFalse(genreId);
+        return videos.stream()
+                .map(videoMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public VideoDTO updateVideo(Long id, VideoDTO videoDTO) {

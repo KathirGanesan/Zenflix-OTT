@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zenflix.ott.dto.SubscriptionDTO;
 import com.zenflix.ott.service.SubscriptionService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/subscriptions")
 public class SubscriptionController {
@@ -28,7 +30,7 @@ public class SubscriptionController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')") // Only admins can create subscriptions
-    public ResponseEntity<SubscriptionDTO> createSubscription(@RequestBody SubscriptionDTO subscriptionDTO) {
+    public ResponseEntity<SubscriptionDTO> createSubscription(@Valid @RequestBody SubscriptionDTO subscriptionDTO) {
         SubscriptionDTO createdSubscription = subscriptionService.createSubscription(subscriptionDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(createdSubscription);
@@ -52,7 +54,7 @@ public class SubscriptionController {
     @PreAuthorize("hasRole('ADMIN')") // Only admins can update subscriptions
     public ResponseEntity<SubscriptionDTO> updateSubscription(
             @PathVariable Long id,
-            @RequestBody SubscriptionDTO subscriptionDTO
+            @Valid @RequestBody SubscriptionDTO subscriptionDTO
     ) {
         SubscriptionDTO updatedSubscription = subscriptionService.updateSubscription(id, subscriptionDTO);
         return ResponseEntity.ok(updatedSubscription);

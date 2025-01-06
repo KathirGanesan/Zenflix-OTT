@@ -2,8 +2,6 @@ package com.zenflix.ott.entity;
 
 import java.util.List;
 
-import org.hibernate.validator.constraints.URL;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,14 +27,12 @@ public class Video extends Auditable{
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
 
- @NotBlank(message = "Title cannot be blank")
  @Column(nullable = false)
  private String title;
 
  @Column(nullable = false)
  private String description;
  
- @URL(message = "Invalid URL format")
  @Column(length = 255, nullable = true) // Allow nullable URLs
  private String url;
 

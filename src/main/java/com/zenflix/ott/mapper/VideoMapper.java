@@ -19,6 +19,7 @@ public class VideoMapper {
         videoDTO.setGenreId(video.getGenre() != null ? video.getGenre().getId() : null);
         videoDTO.setIsPublicTrailer(video.getIsPublicTrailer());
         videoDTO.setUrl(video.getUrl());
+        videoDTO.setDeleted(video.getDeleted());
         // Map auditable fields
         videoDTO.setCreatedAt(video.getCreatedAt());
         videoDTO.setCreatedBy(video.getCreatedBy());
@@ -38,7 +39,7 @@ public class VideoMapper {
         video.setGenre(genre);
         video.setIsPublicTrailer(videoDTO.getIsPublicTrailer());
         video.setUrl(videoDTO.getUrl());
-        video.setDeleted(false);
+        video.setDeleted(videoDTO.getDeleted() != null ? videoDTO.getDeleted() : false);
         return video;
     }
 }

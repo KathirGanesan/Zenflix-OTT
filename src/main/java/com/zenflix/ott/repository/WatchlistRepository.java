@@ -15,4 +15,5 @@ public interface WatchlistRepository extends JpaRepository<Watchlist, Long> {
     List<Watchlist> findByVideoId(Long videoId);
     List<Watchlist> findAllByDeletedFalse();
     boolean existsByUserAndVideo(User user, Video video);
+    List<Watchlist> findByUserIdAndDeletedFalse(Long userId);
 }
