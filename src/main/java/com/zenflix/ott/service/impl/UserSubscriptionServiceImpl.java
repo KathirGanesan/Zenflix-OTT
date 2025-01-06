@@ -177,15 +177,16 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
 
     @Override
-    public void unsubscribe(Long id) {
-        UserSubscription userSubscription = userSubscriptionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("UserSubscription not found"));
+    public void unsubscribe(Long userId, Long subscriptionId) {
+        UserSubscription userSubscription = userSubscriptionRepository.findByUserIdAndSubscriptionIdAndActiveTrue(userId, subscriptionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Active subscription not found for the given user and subscription"));
 
         // Mark subscription as inactive
         userSubscription.setActive(false);
         userSubscription.setIsAutoRenew(false); // Disable auto-renew as part of unsubscribe
         userSubscriptionRepository.save(userSubscription);
     }
+
 
     @Override
     public UserSubscriptionDTO toggleAutoRenew(Long id) {

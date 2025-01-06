@@ -21,6 +21,7 @@ public class WatchlistMapper {
         watchlistDTO.setCreatedBy(watchlist.getCreatedBy());
         watchlistDTO.setModifiedAt(watchlist.getModifiedAt());
         watchlistDTO.setModifiedBy(watchlist.getModifiedBy());  
+        watchlistDTO.setDeleted(watchlist.getDeleted());
         return watchlistDTO;
     }
 

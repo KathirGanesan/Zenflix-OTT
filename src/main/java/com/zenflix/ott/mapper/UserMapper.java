@@ -18,8 +18,10 @@ public class UserMapper {
 
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
-        userDTO.setUsername(user.getUsername());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
         userDTO.setEmail(user.getEmail());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
         userDTO.setDeleted(user.getDeleted());
         userDTO.setPassword(null); // Do not expose the password
         userDTO.setRoles(user.getRoles()
@@ -43,9 +45,11 @@ public class UserMapper {
 
         User user = new User();
         user.setId(userDTO.getId());
-        user.setUsername(userDTO.getUsername());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
-        user.setDeleted(userDTO.getDeleted());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setDeleted(userDTO.getDeleted() != null ? userDTO.getDeleted() : false);
 
         // Password should only be set if provided
         if (userDTO.getPassword() != null) {
@@ -62,8 +66,10 @@ public class UserMapper {
 
         UserResponseDTO userResponseDTO = new UserResponseDTO();
         userResponseDTO.setId(user.getId());
-        userResponseDTO.setUsername(user.getUsername());
+        userResponseDTO.setFirstName(user.getFirstName());
+        userResponseDTO.setLastName(user.getLastName());
         userResponseDTO.setEmail(user.getEmail());
+        userResponseDTO.setPhoneNumber(user.getPhoneNumber());
         userResponseDTO.setDeleted(user.getDeleted());
         userResponseDTO.setRoles(
             user.getRoles()

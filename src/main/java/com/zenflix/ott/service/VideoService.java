@@ -11,4 +11,5 @@ public interface VideoService {
     VideoDTO updateVideo(Long id, VideoDTO videoDTO);
     void deleteVideo(Long id);
 	List<VideoDTO> getPublicTrailers();
+	List<VideoDTO> getVideosByGenre(Long genreId);
 }

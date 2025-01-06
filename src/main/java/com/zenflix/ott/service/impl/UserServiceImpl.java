@@ -33,25 +33,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO createUser(UserDTO userDTO) {
-        // Create a new User entity
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
+    	
+        User user = userMapper.toEntity(userDTO);
+
+        // Encrypt the password
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setEmail(userDTO.getEmail());
-        user.setDeleted(false); // Ensure 'deleted' is set to false by default
 
         // Fetch roles from the database and set them for the user
         List<Role> roles = roleRepository.findByNameIn(userDTO.getRoles());
         if (roles.isEmpty()) {
             throw new ResourceNotFoundException("Invalid roles provided. Please check role names.");
         }
-        user.setRoles(new HashSet<>(roles));
+        user.setRoles(new HashSet<>(roles)); // Associate roles with the user
 
         // Save the user with associated roles
         User savedUser = userRepository.save(user);
 
+        // Convert and return the response DTO
         return userMapper.toResponseDTO(savedUser);
     }
+
 
 
 
@@ -77,7 +78,9 @@ public class UserServiceImpl implements UserService {
             .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         // Update basic user details
-        existingUser.setUsername(userDTO.getUsername());
+        existingUser.setFirstName(userDTO.getFirstName());
+        existingUser.setLastName(userDTO.getLastName());
+        existingUser.setPhoneNumber(userDTO.getPhoneNumber());
         existingUser.setEmail(userDTO.getEmail());
 
         // If roles are provided in the DTO, update roles

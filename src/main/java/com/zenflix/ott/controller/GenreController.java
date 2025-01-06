@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zenflix.ott.dto.GenreDTO;
 import com.zenflix.ott.service.GenreService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/genres")
 public class GenreController {
@@ -28,7 +30,7 @@ public class GenreController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')") // Only admins can create genres
-    public ResponseEntity<GenreDTO> createGenre(@RequestBody GenreDTO genreDTO) {
+    public ResponseEntity<GenreDTO> createGenre(@Valid @RequestBody GenreDTO genreDTO) {
         GenreDTO createdGenre = genreService.createGenre(genreDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdGenre);
     }
@@ -49,7 +51,7 @@ public class GenreController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')") // Only admins can update genres
-    public ResponseEntity<GenreDTO> updateGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO) {
+    public ResponseEntity<GenreDTO> updateGenre(@PathVariable Long id, @Valid @RequestBody GenreDTO genreDTO) {
         GenreDTO updatedGenre = genreService.updateGenre(id, genreDTO);
         return ResponseEntity.ok(updatedGenre);
     }

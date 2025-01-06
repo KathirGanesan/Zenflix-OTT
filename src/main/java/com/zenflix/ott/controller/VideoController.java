@@ -52,11 +52,19 @@ public class VideoController {
         return ResponseEntity.ok(videos);
     }
 
+    @GetMapping("/genre/{genreId}")
+    @RequiresSubscription
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')") // Accessible by both users and admins
+    public ResponseEntity<List<VideoDTO>> getVideosByGenre(@PathVariable Long genreId) {
+        List<VideoDTO> videos = videoService.getVideosByGenre(genreId);
+        return ResponseEntity.ok(videos);
+    }
+    
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')") // Only admins can update videos
     public ResponseEntity<VideoDTO> updateVideo(
             @PathVariable Long id,
-            @RequestBody VideoDTO videoDTO
+            @Valid @RequestBody VideoDTO videoDTO
     ) {
         VideoDTO updatedVideo = videoService.updateVideo(id, videoDTO);
         return ResponseEntity.ok(updatedVideo);

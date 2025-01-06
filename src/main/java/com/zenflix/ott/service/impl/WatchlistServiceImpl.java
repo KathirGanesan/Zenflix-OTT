@@ -54,17 +54,21 @@ public class WatchlistServiceImpl implements WatchlistService {
 
     @Override
     public List<WatchlistDTO> getWatchlistByUserId(Long userId) {
-        return watchlistRepository.findByUserId(userId).stream()
+        return watchlistRepository.findByUserIdAndDeletedFalse(userId).stream()
             .map(watchlistMapper::toDTO)
             .collect(Collectors.toList());
     }
 
     @Override
     public void removeVideoFromWatchlist(Long userId, Long videoId) {
-        List<Watchlist> watchlistEntries = watchlistRepository.findByUserId(userId);
+        List<Watchlist> watchlistEntries = watchlistRepository.findByUserIdAndDeletedFalse(userId);
         watchlistEntries.stream()
             .filter(watchlist -> watchlist.getVideo().getId().equals(videoId))
             .findFirst()
-            .ifPresent(watchlistRepository::delete);
+            .ifPresent(watchlist -> {
+                watchlist.setDeleted(true); // Set the `deleted` flag to true
+                watchlistRepository.save(watchlist); // Save the updated record
+            });
     }
+
 }

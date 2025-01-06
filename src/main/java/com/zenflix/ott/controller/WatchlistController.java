@@ -17,6 +17,8 @@ import com.zenflix.ott.dto.WatchlistDTO;
 import com.zenflix.ott.security.RequiresSubscription;
 import com.zenflix.ott.service.WatchlistService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/watchlists")
 public class WatchlistController {
@@ -28,8 +30,8 @@ public class WatchlistController {
 
     @RequiresSubscription
     @PostMapping
-    @PreAuthorize("hasRole('USER')") // Only users with the role USER can add to the watchlist
-    public ResponseEntity<WatchlistDTO> addVideoToWatchlist(@RequestBody WatchlistDTO watchlistDTO) {
+    @PreAuthorize("hasRole('ADMIN') or #userId == principal.id") // Only admins or the user themselves
+    public ResponseEntity<WatchlistDTO> addVideoToWatchlist(@Valid @RequestBody WatchlistDTO watchlistDTO) {
         WatchlistDTO addedWatchlist = watchlistService.addVideoToWatchlist(watchlistDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(addedWatchlist);
@@ -45,7 +47,7 @@ public class WatchlistController {
 
     @RequiresSubscription
     @DeleteMapping("/user/{userId}/video/{videoId}")
-    @PreAuthorize("hasRole('USER')") // Only users with the role USER can remove from the watchlist
+    @PreAuthorize("hasRole('ADMIN') or #userId == principal.id") // Only admins or the user themselves
     public ResponseEntity<Void> removeVideoFromWatchlist(
             @PathVariable Long userId,
             @PathVariable Long videoId

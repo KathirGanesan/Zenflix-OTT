@@ -12,4 +12,5 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     List<Video> findByGenreId(Long genreId);
     List<Video> findAllByDeletedFalse();
     List<Video> findByIsPublicTrailerTrue();
+    List<Video> findByGenreIdAndDeletedFalse(Long genreId);
 }

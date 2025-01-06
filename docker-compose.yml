@@ -5,8 +5,8 @@ services:
     image: postgres:15
     container_name: zenflix-postgres
     environment:
-      POSTGRES_USER: zenflix_user
-      POSTGRES_PASSWORD: ott@3456
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: zenflix_db
     ports:
       - "5433:5432"
@@ -22,11 +22,9 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+    env_file:
+      - .env
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/zenflix_db
-      SPRING_DATASOURCE_USERNAME: zenflix_user
-      SPRING_DATASOURCE_PASSWORD: ott@3456
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_PROFILES_ACTIVE: docker
 
 volumes:
