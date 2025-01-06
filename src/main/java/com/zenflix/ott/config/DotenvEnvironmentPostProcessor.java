@@ -14,5 +14,6 @@ public class DotenvEnvironmentPostProcessor implements EnvironmentPostProcessor 
             // Let Spring see them as system properties
             System.setProperty(entry.getKey(), entry.getValue());
         });
+        System.out.println("DotenvEnvironmentPostProcessor: .env loaded.");
     }
 }
