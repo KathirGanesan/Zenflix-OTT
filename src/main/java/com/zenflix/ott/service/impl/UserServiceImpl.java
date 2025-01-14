@@ -1,12 +1,6 @@
 package com.zenflix.ott.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
+import com.zenflix.ott.dto.RegisterRequest;
 import com.zenflix.ott.dto.UserDTO;
 import com.zenflix.ott.dto.UserResponseDTO;
 import com.zenflix.ott.entity.Role;
@@ -16,6 +10,13 @@ import com.zenflix.ott.mapper.UserMapper;
 import com.zenflix.ott.repository.RoleRepository;
 import com.zenflix.ott.repository.UserRepository;
 import com.zenflix.ott.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,7 +34,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO createUser(UserDTO userDTO) {
-    	
+
+        if (userRepository.existsByPhoneNumber(userDTO.getPhoneNumber())) {
+            throw new IllegalArgumentException("Phone number is already in use.");
+        }
+
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            throw new IllegalArgumentException("Email is already in use.");
+        }
+
         User user = userMapper.toEntity(userDTO);
 
         // Encrypt the password
@@ -107,4 +116,27 @@ public class UserServiceImpl implements UserService {
         user.setDeleted(true);
         userRepository.save(user);
     }
+
+    @Override
+    public UserResponseDTO register(RegisterRequest registerRequest) {
+            if (userRepository.existsByPhoneNumber(registerRequest.getPhoneNumber())) {
+                throw new IllegalArgumentException("Phone number is already in use.");
+            }
+
+            if (userRepository.existsByEmail(registerRequest.getEmail())) {
+                throw new IllegalArgumentException("Email is already in use.");
+            }
+            User user = new User();
+            user.setFirstName(registerRequest.getFirstName());
+            user.setLastName(registerRequest.getLastName());
+            user.setEmail(registerRequest.getEmail());
+            user.setPhoneNumber(registerRequest.getPhoneNumber());
+            user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+            user.setRoles(new HashSet<>(roleRepository.findByNameIn(Collections.singletonList("ROLE_USER"))));
+            user.setDeleted(false);
+
+            User savedUser = userRepository.save(user);
+            return userMapper.toResponseDTO(savedUser);
+    }
+
 }

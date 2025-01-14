@@ -1,9 +1,10 @@
 package com.zenflix.ott.service;
 
-import java.util.List;
-
+import com.zenflix.ott.dto.RegisterRequest;
 import com.zenflix.ott.dto.UserDTO;
 import com.zenflix.ott.dto.UserResponseDTO;
+
+import java.util.List;
 
 public interface UserService {
     UserResponseDTO createUser(UserDTO userDTO);
@@ -11,4 +12,6 @@ public interface UserService {
     List<UserResponseDTO> getAllUsers();
     UserResponseDTO updateUser(Long id, UserDTO userDTO);
     void deleteUser(Long id);
+
+    UserResponseDTO register(RegisterRequest registerRequest);
 }
