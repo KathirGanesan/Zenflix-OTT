@@ -1,10 +1,12 @@
 package com.zenflix.ott.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.zenflix.ott.dto.ErrorResponse;
+import com.zenflix.ott.dto.LoginRequest;
+import com.zenflix.ott.dto.RegisterRequest;
+import com.zenflix.ott.dto.UserResponseDTO;
+import com.zenflix.ott.security.JwtTokenUtil;
+import com.zenflix.ott.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,10 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zenflix.ott.dto.LoginRequest;
-import com.zenflix.ott.security.JwtTokenUtil;
-
-import jakarta.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -28,10 +30,22 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
+    private final UserService userService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
+        try {
+        UserResponseDTO registeredUser = userService.register(registerRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(e.getMessage()));
+    }
     }
 
     @PostMapping("/login")

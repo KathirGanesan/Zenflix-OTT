@@ -1,9 +1,7 @@
 package com.zenflix.ott.exception;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -13,7 +11,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -68,5 +68,18 @@ public class GlobalExceptionHandler {
         response.put("error", "Unauthorized");
         response.put("message", "Invalid username or password");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        if (ex.getMessage().contains("uk_phone_number")) { // Replace with your actual constraint name
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("A user with the same phone number already exists.");
+        } else if (ex.getMessage().contains("uk_email")) { // Replace with your actual constraint name
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("A user with the same email already exists.");
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("A database error occurred.");
     }
 }
