@@ -1,5 +1,12 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="
+                      http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                      http://www.liquibase.org/xml/ns/dbchangelog-ext
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-1">
         <createTable tableName="genres">
             <column autoIncrement="true" name="id" type="BIGINT">
@@ -233,7 +240,8 @@
         <addUniqueConstraint columnNames="name" constraintName="ukofx66keruapi6vyqpv6f2or37" tableName="roles"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-10">
-        <addUniqueConstraint columnNames="plan_name" constraintName="ukeyt9yslvocsaq6ukg420vul1l" tableName="subscriptions"/>
+        <addUniqueConstraint columnNames="plan_name" constraintName="ukeyt9yslvocsaq6ukg420vul1l"
+                             tableName="subscriptions"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-11">
         <addUniqueConstraint columnNames="email" constraintName="uk6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
@@ -241,11 +249,9 @@
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-12">
         <addUniqueConstraint columnNames="phone_number" constraintName="uk9q63snka3mdh91as4io72espi" tableName="users"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-13">
-        <addUniqueConstraint columnNames="username" constraintName="ukr43af9ap4edm43mmtq01oddj6" tableName="users"/>
-    </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-14">
-        <addUniqueConstraint columnNames="transaction_id" constraintName="uklryndveuwa4k5qthti0pkmtlx" tableName="payments"/>
+        <addUniqueConstraint columnNames="transaction_id" constraintName="uklryndveuwa4k5qthti0pkmtlx"
+                             tableName="payments"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-15">
         <createTable tableName="user_roles">
@@ -282,34 +288,61 @@
         </createTable>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-17">
-        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="payments" constraintName="fka3xnf2o6mt8cqbewvq2ouq3rq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="payments"
+                                 constraintName="fka3xnf2o6mt8cqbewvq2ouq3rq" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-18">
-        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles" constraintName="fkh8ciramu9cc9q3qcqiv4ue8a6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles"
+                                 constraintName="fkh8ciramu9cc9q3qcqiv4ue8a6" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="roles" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-19">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="fkhfh9dx7w3ubf1co1vdev94g3f" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles"
+                                 constraintName="fkhfh9dx7w3ubf1co1vdev94g3f" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-20">
-        <addForeignKeyConstraint baseColumnNames="video_id" baseTableName="watchlists" constraintName="fkiak8wm3vv8rb19gj92hjjxmk3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="videos" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="video_id" baseTableName="watchlists"
+                                 constraintName="fkiak8wm3vv8rb19gj92hjjxmk3" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="videos" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-21">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="payments" constraintName="fkj94hgy9v5fw1munb90tar2eje" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="payments"
+                                 constraintName="fkj94hgy9v5fw1munb90tar2eje" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-22">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_subscription" constraintName="fkn4xrjha3c12vp530y3j0ogef2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_subscription"
+                                 constraintName="fkn4xrjha3c12vp530y3j0ogef2" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-23">
-        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="videos" constraintName="fkpfgjhpet90q6eq0tov4husgi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="genres" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="videos"
+                                 constraintName="fkpfgjhpet90q6eq0tov4husgi" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="genres" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-24">
-        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="user_subscription" constraintName="fkrhfc05gh1fwefgy2udyxolxfj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="user_subscription"
+                                 constraintName="fkrhfc05gh1fwefgy2udyxolxfj" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
     </changeSet>
     <changeSet author="kathir-ganesan (generated)" id="1735985684913-25">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="watchlists" constraintName="fksjis83bxhryaemq9m6gv5r0pb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="watchlists"
+                                 constraintName="fksjis83bxhryaemq9m6gv5r0pb" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    
+
     <include file="db.changelog-seed-admin-role.xml" relativeToChangelogFile="true"/>
-    
-    
+
+
 </databaseChangeLog>
