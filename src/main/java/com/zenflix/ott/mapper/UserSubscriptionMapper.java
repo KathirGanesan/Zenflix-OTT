@@ -3,7 +3,7 @@ package com.zenflix.ott.mapper;
 import org.springframework.stereotype.Component;
 
 import com.zenflix.ott.dto.UserSubscriptionDTO;
-import com.zenflix.ott.entity.Subscription;
+import com.zenflix.ott.entity.SubscriptionPlan;
 import com.zenflix.ott.entity.User;
 import com.zenflix.ott.entity.UserSubscription;
 
@@ -14,7 +14,7 @@ public class UserSubscriptionMapper {
         UserSubscriptionDTO dto = new UserSubscriptionDTO();
         dto.setId(userSubscription.getId());
         dto.setUserId(userSubscription.getUser().getId());
-        dto.setSubscriptionId(userSubscription.getSubscription().getId());
+        dto.setSubscriptionId(userSubscription.getSubscriptionPlan().getId());
         dto.setStartDate(userSubscription.getStartDate());
         dto.setEndDate(userSubscription.getEndDate());
         dto.setNextRenewalDate(userSubscription.getNextRenewalDate());
@@ -27,12 +27,12 @@ public class UserSubscriptionMapper {
         return dto;
     }
 
-    public UserSubscription toEntity(UserSubscriptionDTO dto, User user, Subscription subscription) {
+    public UserSubscription toEntity(UserSubscriptionDTO dto, User user, SubscriptionPlan subscriptionPlan) {
         if (dto == null) return null;
         UserSubscription userSubscription = new UserSubscription();
         userSubscription.setId(dto.getId());
         userSubscription.setUser(user);
-        userSubscription.setSubscription(subscription);
+        userSubscription.setSubscriptionPlan(subscriptionPlan);
         userSubscription.setStartDate(dto.getStartDate());
         userSubscription.setEndDate(dto.getEndDate());
         userSubscription.setNextRenewalDate(dto.getNextRenewalDate());

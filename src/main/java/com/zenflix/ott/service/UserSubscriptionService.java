@@ -1,8 +1,8 @@
 package com.zenflix.ott.service;
 
-import java.util.List;
-
 import com.zenflix.ott.dto.UserSubscriptionDTO;
+
+import java.util.List;
 
 public interface UserSubscriptionService {
     UserSubscriptionDTO userSubscribe(UserSubscriptionDTO userSubscriptionDTO);
@@ -10,4 +10,5 @@ public interface UserSubscriptionService {
     List<UserSubscriptionDTO> getAllUserSubscriptions();
     void unsubscribe(Long userId, Long subscriptionId);
     UserSubscriptionDTO toggleAutoRenew(Long id);
+    void activateSubscriptionByTransactionReference(String transactionReferenceId);
 }

@@ -33,7 +33,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll() // Public access to auth APIs
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated() // Protect other APIs
+                    .requestMatchers("/api/webhooks/razorpay").permitAll()
+                    .anyRequest().authenticated() // Protect other APIs
             )
             .exceptionHandling(exceptions -> exceptions
                 .authenticationEntryPoint((request, response, authException) -> {

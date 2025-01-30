@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class SubscriptionDTO {
+public class SubscriptionPlanDTO {
 	
 	 private Long id;
 

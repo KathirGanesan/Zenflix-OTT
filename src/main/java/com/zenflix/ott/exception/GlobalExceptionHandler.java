@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SubscriptionConflictException.class)
     public ResponseEntity<Map<String, String>> handleSubscriptionConflict(SubscriptionConflictException ex) {
         Map<String, String> response = new HashMap<>();
-        response.put("error", "Subscription Conflict");
+        response.put("error", "SubscriptionPlan Conflict");
         response.put("message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response); // HTTP 409 Conflict
     }

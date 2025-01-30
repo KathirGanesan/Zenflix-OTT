@@ -1,28 +1,22 @@
 package com.zenflix.ott.entity;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "subscriptions")
-public class Subscription extends Auditable{
+@Table(name = "subscription_plans")
+public class SubscriptionPlan extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,6 +33,6 @@ public class Subscription extends Auditable{
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean deleted = false;
 
-    @OneToMany(mappedBy = "subscription", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subscriptionPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserSubscription> userSubscriptions = new ArrayList<>();
 }
