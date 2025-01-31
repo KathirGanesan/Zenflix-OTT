@@ -1,32 +1,22 @@
 package com.zenflix.ott.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import com.zenflix.ott.enums.PaymentStatus;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "payments")
-public class Payment extends Auditable{
+@Table(name = "transactions")
+public class Transaction extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,7 +27,7 @@ public class Payment extends Auditable{
 
     @ManyToOne
     @JoinColumn(name = "subscription_id", nullable = false)
-    private Subscription subscription;
+    private SubscriptionPlan subscriptionPlan;
 
     @Column(nullable = false)
     private BigDecimal amount;
@@ -49,7 +39,9 @@ public class Payment extends Auditable{
     @Column(name = "transaction_date", nullable = false)
     private LocalDateTime transactionDate;
 
-    @Column(name = "transaction_id", unique = true)
-    private String transactionId;
+    @Column(name = "transaction_reference_id", unique = true)
+    private String transactionReferenceId;
 
+    @Column(name = "razorpay_payment_id", unique = true, nullable = true)
+    private String razorpayPaymentId;
 }

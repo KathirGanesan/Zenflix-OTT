@@ -9,6 +9,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
@@ -31,7 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SubscriptionConflictException.class)
     public ResponseEntity<Map<String, String>> handleSubscriptionConflict(SubscriptionConflictException ex) {
         Map<String, String> response = new HashMap<>();
-        response.put("error", "Subscription Conflict");
+        response.put("error", "SubscriptionPlan Conflict");
         response.put("message", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response); // HTTP 409 Conflict
     }
@@ -81,5 +83,33 @@ public class GlobalExceptionHandler {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("A database error occurred.");
+    }
+
+    @ExceptionHandler(VideoAlreadyInWatchlistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public Map<String, String> handleAlreadyInWatchlist(VideoAlreadyInWatchlistException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", "Conflict");
+        errorResponse.put("message", ex.getMessage());
+        return errorResponse;
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseBody
+    public Map<String, String> handleIllegalState(IllegalStateException ex) {
+        return Map.of(
+                "error", "Conflict",
+                "message", ex.getMessage()
+        );
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

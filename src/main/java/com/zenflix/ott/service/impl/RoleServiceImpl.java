@@ -25,18 +25,33 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public RoleDTO createRole(RoleDTO roleDTO) {
+		// Check if a role with the same name already exists
+		if (roleRepository.existsByName(roleDTO.getName())) {
+			throw new IllegalArgumentException("A role with this name already exists.");
+		}
+
 		Role role = roleMapper.toEntity(roleDTO);
 		Role savedRole = roleRepository.save(role);
 		return roleMapper.toDTO(savedRole);
 	}
 
+
 	@Override
 	public RoleDTO updateRole(Long roleId, RoleDTO roleDTO) {
-		Role role = roleRepository.findById(roleId).orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+		Role role = roleRepository.findById(roleId)
+				.orElseThrow(() -> new ResourceNotFoundException("Role not found"));
+
+		// Check if another role with the same name exists, excluding the current one
+		if (roleRepository.existsByName(roleDTO.getName()) &&
+				!role.getName().equals(roleDTO.getName())) {
+			throw new IllegalArgumentException("A role with this name already exists.");
+		}
+
 		role.setName(roleDTO.getName());
 		Role updatedRole = roleRepository.save(role);
 		return roleMapper.toDTO(updatedRole);
 	}
+
 
 	@Override
 	public void deleteRole(Long roleId) {

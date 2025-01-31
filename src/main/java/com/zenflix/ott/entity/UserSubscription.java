@@ -1,26 +1,20 @@
 package com.zenflix.ott.entity;
 
-import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.zenflix.ott.enums.SubscriptionStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "user_subscription")
+@Table(name = "user_subscriptions")
 public class UserSubscription extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +26,7 @@ public class UserSubscription extends Auditable{
 
     @ManyToOne
     @JoinColumn(name = "subscription_id", nullable = false)
-    private Subscription subscription;
+    private SubscriptionPlan subscriptionPlan;
 
     @Column(name = "start_date", nullable = false)
     private LocalDateTime startDate;
@@ -43,13 +37,11 @@ public class UserSubscription extends Auditable{
     @Column(name = "next_renewal_date", nullable = false)
     private LocalDateTime nextRenewalDate;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subscription_status", nullable = false)
+    private SubscriptionStatus subscriptionStatus;
 
-    @Column(name = "is_auto_renew", nullable = false)
-    private Boolean isAutoRenew;
-
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean active;
-
-    // Getters and Setters
+    @Column(name = "transaction_reference_id", unique = true)
+    private String transactionReferenceId;
 }
 

@@ -1,25 +1,26 @@
 package com.zenflix.ott.security;
 
-import java.security.Key;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
+import com.zenflix.ott.config.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.List;
 
 @Component
+@ConfigurationProperties(prefix = "jwt")
 public class JwtTokenUtil {
 
     private final Key SECRET_KEY;
 
-    public JwtTokenUtil(@Value("${jwt.secret}") String secret) {
-        this.SECRET_KEY = Keys.hmacShaKeyFor(secret.getBytes());
+    public JwtTokenUtil(JwtProperties jwtProperties) {
+        this.SECRET_KEY = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
     }
 
     public String generateToken(String username, List<String> roles) {
