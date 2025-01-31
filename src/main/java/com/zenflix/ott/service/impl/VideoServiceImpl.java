@@ -1,10 +1,5 @@
 package com.zenflix.ott.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.zenflix.ott.dto.VideoDTO;
 import com.zenflix.ott.entity.Genre;
 import com.zenflix.ott.entity.Video;
@@ -13,6 +8,10 @@ import com.zenflix.ott.mapper.VideoMapper;
 import com.zenflix.ott.repository.GenreRepository;
 import com.zenflix.ott.repository.VideoRepository;
 import com.zenflix.ott.service.VideoService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -28,12 +27,18 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public VideoDTO createVideo(VideoDTO videoDTO) {
+        // Check if a video with the same title and isPublicTrailer already exists
+        if (videoRepository.existsByTitleAndIsPublicTrailer(videoDTO.getTitle(), videoDTO.getIsPublicTrailer())) {
+            throw new IllegalArgumentException("A video with this title and public trailer status already exists.");
+        }
+
         Genre genre = genreRepository.findById(videoDTO.getGenreId())
                 .orElseThrow(() -> new ResourceNotFoundException("Genre not found"));
         Video video = videoMapper.toEntity(videoDTO, genre);
         Video savedVideo = videoRepository.save(video);
         return videoMapper.toDTO(savedVideo);
     }
+
 
     @Override
     public VideoDTO getVideoById(Long id) {
@@ -60,14 +65,24 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public VideoDTO updateVideo(Long id, VideoDTO videoDTO) {
         Video existingVideo = videoRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Video not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Video not found"));
+
+        // Check if a video with the same title and isPublicTrailer exists, excluding the current video being updated
+        if (videoRepository.existsByTitleAndIsPublicTrailer(videoDTO.getTitle(), videoDTO.getIsPublicTrailer()) &&
+                !(existingVideo.getTitle().equals(videoDTO.getTitle()) &&
+                        existingVideo.getIsPublicTrailer().equals(videoDTO.getIsPublicTrailer()))) {
+            throw new IllegalArgumentException("A video with this title and public trailer status already exists.");
+        }
+
         existingVideo.setTitle(videoDTO.getTitle());
         existingVideo.setDescription(videoDTO.getDescription());
         existingVideo.setUrl(videoDTO.getUrl());
         existingVideo.setIsPublicTrailer(videoDTO.getIsPublicTrailer());
+
         Video updatedVideo = videoRepository.save(existingVideo);
         return videoMapper.toDTO(updatedVideo);
     }
+
 
     @Override
     public void deleteVideo(Long id) {

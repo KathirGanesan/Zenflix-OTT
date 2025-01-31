@@ -20,9 +20,6 @@ public class UserSubscriptionDTO {
     @NotNull(message = "SubscriptionPlan ID is required")
     private Long subscriptionId;
     
-    @NotNull(message = "Auto-renew status must be specified")
-    private Boolean isAutoRenew;
-    
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private LocalDateTime nextRenewalDate;
@@ -30,6 +27,7 @@ public class UserSubscriptionDTO {
     private String transactionReferenceId;
     private String paymentStatusMessage;
     private String paymentLink;
+    private String subscriptionStatus;
     // Auditable fields
     private LocalDateTime createdAt;
     private String createdBy;

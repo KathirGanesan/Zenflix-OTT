@@ -7,8 +7,7 @@ import java.util.List;
 public interface UserSubscriptionService {
     UserSubscriptionDTO userSubscribe(UserSubscriptionDTO userSubscriptionDTO);
     UserSubscriptionDTO getUserSubscriptionById(Long id);
-    List<UserSubscriptionDTO> getAllUserSubscriptions();
-    void unsubscribe(Long userId, Long subscriptionId);
-    UserSubscriptionDTO toggleAutoRenew(Long id);
+    List<UserSubscriptionDTO> getActiveAndQueuedUserSubscriptions();
+    void unsubscribe(Long userId, Long userSubscriptionId);
     void activateSubscriptionByTransactionReference(String transactionReferenceId);
 }

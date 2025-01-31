@@ -1,20 +1,20 @@
 package com.zenflix.ott.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import com.zenflix.ott.dto.WatchlistDTO;
 import com.zenflix.ott.entity.User;
 import com.zenflix.ott.entity.Video;
 import com.zenflix.ott.entity.Watchlist;
 import com.zenflix.ott.exception.ResourceNotFoundException;
+import com.zenflix.ott.exception.VideoAlreadyInWatchlistException;
 import com.zenflix.ott.mapper.WatchlistMapper;
 import com.zenflix.ott.repository.UserRepository;
 import com.zenflix.ott.repository.VideoRepository;
 import com.zenflix.ott.repository.WatchlistRepository;
 import com.zenflix.ott.service.WatchlistService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WatchlistServiceImpl implements WatchlistService {
@@ -39,9 +39,9 @@ public class WatchlistServiceImpl implements WatchlistService {
                 .orElseThrow(() -> new ResourceNotFoundException("Video not found"));
 
         // Check if video is already in the user's watchlist
-        boolean alreadyInWatchlist = watchlistRepository.existsByUserAndVideo(user, video);
+        boolean alreadyInWatchlist = watchlistRepository.existsByUserAndVideoAndDeletedFalse(user, video);
         if (alreadyInWatchlist) {
-            throw new IllegalArgumentException("Video is already in the watchlist");
+            throw new VideoAlreadyInWatchlistException("Video is already in the watchlist");
         }
 
         // Map and save the watchlist entry

@@ -23,10 +23,15 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
 
     @Override
     public SubscriptionPlanDTO createSubscriptionPlan(SubscriptionPlanDTO subscriptionPlanDTO) {
+        if (subscriptionPlanRepository.existsByPlanName(subscriptionPlanDTO.getPlanName())) {
+            throw new IllegalArgumentException("Subscription plan with this name already exists.");
+        }
+
         SubscriptionPlan subscriptionPlan = subscriptionPlanMapper.toEntity(subscriptionPlanDTO);
         SubscriptionPlan savedSubscriptionPlan = subscriptionPlanRepository.save(subscriptionPlan);
         return subscriptionPlanMapper.toDTO(savedSubscriptionPlan);
     }
+
 
     @Override
     public SubscriptionPlanDTO getSubscriptionPlanById(Long id) {
@@ -45,13 +50,22 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     @Override
     public SubscriptionPlanDTO updateSubscriptionPlan(Long id, SubscriptionPlanDTO subscriptionPlanDTO) {
         SubscriptionPlan existingSubscriptionPlan = subscriptionPlanRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("SubscriptionPlan not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("SubscriptionPlan not found"));
+
+        // Check if the new plan name already exists (excluding the current plan being updated)
+        if (subscriptionPlanRepository.existsByPlanName(subscriptionPlanDTO.getPlanName()) &&
+                !existingSubscriptionPlan.getPlanName().equals(subscriptionPlanDTO.getPlanName())) {
+            throw new IllegalArgumentException("Subscription plan with this name already exists.");
+        }
+
         existingSubscriptionPlan.setPlanName(subscriptionPlanDTO.getPlanName());
         existingSubscriptionPlan.setDurationMonths(subscriptionPlanDTO.getDurationMonths());
         existingSubscriptionPlan.setPrice(subscriptionPlanDTO.getPrice());
+
         SubscriptionPlan updatedSubscriptionPlan = subscriptionPlanRepository.save(existingSubscriptionPlan);
         return subscriptionPlanMapper.toDTO(updatedSubscriptionPlan);
     }
+
 
     @Override
     public void deleteSubscriptionPlan(Long id) {

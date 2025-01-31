@@ -35,7 +35,7 @@ public class SubscriptionPlanController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')") // Only admins can view all subscription plans
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')") // Accessible by both users and admins
     public ResponseEntity<List<SubscriptionPlanDTO>> getAllSubscriptionPlans() {
         List<SubscriptionPlanDTO> subscriptions = subscriptionPlanService.getAllSubscriptionPlans();
         return ResponseEntity.ok(subscriptions);

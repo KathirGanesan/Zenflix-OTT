@@ -1,5 +1,6 @@
 package com.zenflix.ott.entity;
 
+import com.zenflix.ott.enums.SubscriptionStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,12 +37,9 @@ public class UserSubscription extends Auditable{
     @Column(name = "next_renewal_date", nullable = false)
     private LocalDateTime nextRenewalDate;
 
-
-    @Column(name = "is_auto_renew", nullable = false)
-    private Boolean isAutoRenew;
-
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
-    private Boolean active;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subscription_status", nullable = false)
+    private SubscriptionStatus subscriptionStatus;
 
     @Column(name = "transaction_reference_id", unique = true)
     private String transactionReferenceId;
