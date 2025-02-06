@@ -1,13 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="
-                      http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-                      http://www.liquibase.org/xml/ns/dbchangelog-ext
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-1">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-1">
         <createTable tableName="genres">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="genres_pkey"/>
@@ -32,7 +25,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-2">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-2">
         <createTable tableName="roles">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="roles_pkey"/>
@@ -57,8 +50,8 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-3">
-        <createTable tableName="subscriptions">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-3">
+        <createTable tableName="subscription_plans">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="subscriptions_pkey"/>
             </column>
@@ -88,47 +81,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-4">
-        <createTable tableName="user_subscription">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="user_subscription_pkey"/>
-            </column>
-            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_by" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="modified_by" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column defaultValueBoolean="true" name="active" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="is_auto_renew" type="BOOLEAN">
-                <constraints nullable="false"/>
-            </column>
-            <column name="next_renewal_date" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="subscription_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="user_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-5">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-4">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
@@ -165,7 +118,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-6">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-5">
         <createTable tableName="videos">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="videos_pkey"/>
@@ -198,8 +151,46 @@
             <column name="genre_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-7">
-        <createTable tableName="payments">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-6">
+        <createTable tableName="user_subscriptions">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_subscription_pkey"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="next_renewal_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscription_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_reference_id" type="VARCHAR"/>
+            <column defaultValue="PENDING" name="subscription_status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-7">
+        <createTable tableName="transactions">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="payments_pkey"/>
             </column>
@@ -224,36 +215,41 @@
             <column name="transaction_date" type="TIMESTAMP WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
-            <column name="transaction_id" type="VARCHAR(255)"/>
+            <column name="transaction_reference_id" type="VARCHAR(255)"/>
             <column name="subscription_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="razorpay_payment_id" type="VARCHAR(50)"/>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-8">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-8">
         <addUniqueConstraint columnNames="name" constraintName="ukpe1a9woik1k97l87cieguyhh4" tableName="genres"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-9">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-9">
         <addUniqueConstraint columnNames="name" constraintName="ukofx66keruapi6vyqpv6f2or37" tableName="roles"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-10">
-        <addUniqueConstraint columnNames="plan_name" constraintName="ukeyt9yslvocsaq6ukg420vul1l"
-                             tableName="subscriptions"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-10">
+        <addUniqueConstraint columnNames="plan_name" constraintName="ukeyt9yslvocsaq6ukg420vul1l" tableName="subscription_plans"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-11">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-11">
         <addUniqueConstraint columnNames="email" constraintName="uk6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-12">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-12">
         <addUniqueConstraint columnNames="phone_number" constraintName="uk9q63snka3mdh91as4io72espi" tableName="users"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-14">
-        <addUniqueConstraint columnNames="transaction_id" constraintName="uklryndveuwa4k5qthti0pkmtlx"
-                             tableName="payments"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-13">
+        <addUniqueConstraint columnNames="transaction_reference_id" constraintName="user_subscriptions_transaction_reference_id_unique" tableName="user_subscriptions"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-15">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-14">
+        <addUniqueConstraint columnNames="razorpay_payment_id" constraintName="transactions_razorpay_payment_id_key" tableName="transactions"/>
+    </changeSet>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-15">
+        <addUniqueConstraint columnNames="transaction_reference_id" constraintName="uklryndveuwa4k5qthti0pkmtlx" tableName="transactions"/>
+    </changeSet>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-16">
         <createTable tableName="user_roles">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="user_roles_pkey"/>
@@ -263,7 +259,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-16">
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-17">
         <createTable tableName="watchlists">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="watchlists_pkey"/>
@@ -287,62 +283,34 @@
             <column name="video_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-17">
-        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="payments"
-                                 constraintName="fka3xnf2o6mt8cqbewvq2ouq3rq" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-18">
+        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="transactions" constraintName="fka3xnf2o6mt8cqbewvq2ouq3rq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="subscription_plans" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-18">
-        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles"
-                                 constraintName="fkh8ciramu9cc9q3qcqiv4ue8a6" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-19">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_roles" constraintName="fkh8ciramu9cc9q3qcqiv4ue8a6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-19">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles"
-                                 constraintName="fkhfh9dx7w3ubf1co1vdev94g3f" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-20">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="fkhfh9dx7w3ubf1co1vdev94g3f" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-20">
-        <addForeignKeyConstraint baseColumnNames="video_id" baseTableName="watchlists"
-                                 constraintName="fkiak8wm3vv8rb19gj92hjjxmk3" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="videos" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-21">
+        <addForeignKeyConstraint baseColumnNames="video_id" baseTableName="watchlists" constraintName="fkiak8wm3vv8rb19gj92hjjxmk3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="videos" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-21">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="payments"
-                                 constraintName="fkj94hgy9v5fw1munb90tar2eje" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-22">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="transactions" constraintName="fkj94hgy9v5fw1munb90tar2eje" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-22">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_subscription"
-                                 constraintName="fkn4xrjha3c12vp530y3j0ogef2" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-23">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_subscriptions" constraintName="fkn4xrjha3c12vp530y3j0ogef2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-23">
-        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="videos"
-                                 constraintName="fkpfgjhpet90q6eq0tov4husgi" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="genres" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-24">
+        <addForeignKeyConstraint baseColumnNames="genre_id" baseTableName="videos" constraintName="fkpfgjhpet90q6eq0tov4husgi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="genres" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-24">
-        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="user_subscription"
-                                 constraintName="fkrhfc05gh1fwefgy2udyxolxfj" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="subscriptions" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-25">
+        <addForeignKeyConstraint baseColumnNames="subscription_id" baseTableName="user_subscriptions" constraintName="fkrhfc05gh1fwefgy2udyxolxfj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="subscription_plans" validate="true"/>
     </changeSet>
-    <changeSet author="kathir-ganesan (generated)" id="1735985684913-25">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="watchlists"
-                                 constraintName="fksjis83bxhryaemq9m6gv5r0pb" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    <changeSet author="kathir-ganesan (generated)" id="1738846804493-26">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="watchlists" constraintName="fksjis83bxhryaemq9m6gv5r0pb" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
 
     <include file="db.changelog-seed-admin-role.xml" relativeToChangelogFile="true"/>
-
 
 </databaseChangeLog>
