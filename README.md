@@ -10,6 +10,7 @@ ZenFlix is an OTT (Over-the-Top) platform backend application inspired by Netfli
 - **Subscription System**: Plans, activations, and renewals.
 - **Watchlist**: Users can add or remove items from their watchlist.
 - **Payment Integration**: Razorpay payment gateway for processing payments.
+- **Payment Webhooks**: Razorpay webhooks handle post-payment updates, automatically updating transactions and subscriptions in the backend.
 - **Database Management**: PostgreSQL as the database with Liquibase for schema migrations.
 - **CI/CD & Deployment**: Dockerized application with AWS EC2 deployment.
 
