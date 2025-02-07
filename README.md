@@ -7,12 +7,17 @@ ZenFlix is an OTT (Over-the-Top) platform backend application inspired by Netfli
 - **Video Management**: CRUD operations for videos, storing and managing video URLs, including genre-based categorization.
 - **Genre Management**: Manage different genres for categorizing content.
 - **User Management**: Registration, authentication (JWT-based), and profile management.
-- **Subscription System**: Plans, activations, and renewals.
+- **Subscription System**: Plans, activations, and renewals.Implemented a cron-based auto-renew mechanism for active subscriptions.
+- **Subscription-Based Access**: Subscribed users gain access to full content, while unsubscribed
+users are limited to public trailers and subscription endpoints only.
 - **Watchlist**: Users can add or remove items from their watchlist.
 - **Payment Integration**: Razorpay payment gateway for processing payments.
 - **Payment Webhooks**: Razorpay webhooks handle post-payment updates, automatically updating transactions and subscriptions in the backend.
 - **Database Management**: PostgreSQL as the database with Liquibase for schema migrations.
 - **CI/CD & Deployment**: Dockerized application with AWS EC2 deployment.
+- **Auditing**: Implemented an auditing mechanism via Spring Data JPA Auditing to track and record changes in entities for better traceability and compliance.
+- Used **dotenv** to securely manage environment variables and sensitive credentials in the
+application
 
 ## Tech Stack
 
@@ -35,7 +40,7 @@ ZenFlix is deployed on an AWS EC2 instance and accessible via the domain:
 
 ### Postman Collection
 
-You can use the Postman collection for both AWS and local environments. Import the collection from the provided link or JSON file.
+You can use the Postman collection for both AWS and local environments. Import the collection from the Postman collections folder.
 
 ## User Access Control
 
