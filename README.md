@@ -109,20 +109,6 @@ To use ZenFlix, follow these steps:
      ```sh
      docker-compose down
      ```
-
-   - Verify that Docker is installed and running:
-     ```sh
-     docker --version && docker info
-     ```
-   - Start all containers using Docker Compose:
-     ```sh
-     docker-compose up -d
-     ```
-   - Stop and remove containers when needed:
-     ```sh
-     docker-compose down
-     ```
-
 ## API Endpoints
 
 - **User Authentication**: `/auth/register`, `/auth/login`
