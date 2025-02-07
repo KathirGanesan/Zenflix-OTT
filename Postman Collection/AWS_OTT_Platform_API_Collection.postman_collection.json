@@ -1,0 +1,905 @@
+{
+    "info": {
+        "_postman_id": "68fd26c3-e18a-4469-88cf-45b1d2320016",
+        "name": "AWS - OTT Platform API Collection",
+        "description": "API collection for all endpoints in the OTT Platform application, organized by use case flow.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+        "_exporter_id": "13138772"
+    },
+    "item": [
+        {
+            "name": "Authentication",
+            "item": [
+                {
+                    "name": "User Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"Rajinikanth\",\n     \"lastName\": \"Rao\",\n    \"email\": \"rajinikanth@gmail.com\",\n    \"password\": \"password\",\n    \"phoneNumber\": \"+918903167890\"\n\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "https://www.zenflixapp.online/api/auth/register"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "User Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"rajinikanth@gmail.com\",\n    \"password\": \"password\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": "https://www.zenflixapp.online/api/auth/login"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Create User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTg4MzAyLCJleHAiOjE3MzU5ODg5MDJ9.y9rBn3axUWo-RKahFuMynE-DYKIONqR_JVEn-w4fJhM",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"Kathir\",\n     \"lastName\": \"Ganesan\",\n    \"email\": \"kathir@gmail.com\",\n    \"password\": \"password\",\n    \"phoneNumber\": \"+918903160033\",\n    \"deleted\": false,\n    \"roles\": [\"ROLE_USER\"]\n}\n"
+                        },
+                        "url": "https://www.zenflixapp.online/api/users"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get User by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/users/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "users",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/users"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTg4OTM2LCJleHAiOjE3MzU5ODk1MzZ9.J0R508aOTS2UFOuZryXm81QJq6ikMIQG87nULtpSICU",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"firstName\": \"Kathir\",\n     \"lastName\": \"Ganesan\",\n    \"email\": \"kathirfile@gmail.com\",\n    \"password\": \"password\",\n    \"phoneNumber\": \"+918903160033\",\n    \"deleted\": false,\n    \"roles\": [\"ROLE_USER\"]\n}\n"
+                        },
+                        "url": "https://www.zenflixapp.online/api/users/2"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/users/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "users",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Roles",
+            "item": [
+                {
+                    "name": "Create Role",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"ROLE_ADMIN\"\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/roles"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Role",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"ROLE_ADMIN\"\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/roles/1"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Roles",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "https://www.zenflixapp.online/api/roles"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Role By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "https://www.zenflixapp.online/api/roles/1"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Role",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": "https://www.zenflixapp.online/api/roles/1"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Genres",
+            "item": [
+                {
+                    "name": "Create Genre",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Drama\"\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/genres"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Genre by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/genres/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "genres",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Genres",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/genres"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Genre",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Action\"\n}"
+                        },
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/genres/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "genres",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Genre",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/genres/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "genres",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Videos",
+            "item": [
+                {
+                    "name": "Create Video",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTkzMzI3LCJleHAiOjE3MzU5OTM5Mjd9.QpFo0SNWOsyuQOH9HoegHsXK1QXYCbAcMvrRFwgKJYA",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Vikram\",\n    \"description\": \"A special agent investigates a murder committed by a masked group of serial killers. However, a tangled maze of clues soon leads him to the drug kingpin of Chennai.\",\n    \"url\": \"https://youtu.be/Uw17HJkrGR0\",\n    \"genreId\": 1,\n    \"isPublicTrailer\": false\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/videos"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Video by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/videos/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "videos",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Videos",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/videos"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Video",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtc2Rob25pQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iLCJST0xFX1VTRVIiXSwiaWF0IjoxNzM1MDQwMTUwLCJleHAiOjE3MzUwNDA3NTB9.v7U7MrnQwDCiWyHIL7KZsRJHDKmUyABf2rl9WGenx9I",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "    {\n        \"title\": \"Vikram Trailer\",\n        \"description\": \"Watch the exciting trailer of Vikram\",\n        \"url\": \"https://youtu.be/OKBMCL-frPU\",\n        \"genreId\": 1,\n        \"isPublicTrailer\": true\n    }"
+                        },
+                        "url": "https://www.zenflixapp.online/api/videos/5"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Video",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/videos/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "videos",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Trailers",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Videos by Genre",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTk0MTAzLCJleHAiOjE3MzU5OTQ3MDN9.2KjwSwCUC6EWsyWCOKa4HsqFn2-9waBrBF_2pYULB0o",
+                                "type": "text"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/videos/genre/2"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Subscriptions",
+            "item": [
+                {
+                    "name": "Create Subscription",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTk0MTAzLCJleHAiOjE3MzU5OTQ3MDN9.2KjwSwCUC6EWsyWCOKa4HsqFn2-9waBrBF_2pYULB0o",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n        \"planName\": \"Annual Plan\",\n        \"durationMonths\": 12,\n        \"price\": \"1799\"\n    }"
+                        },
+                        "url": "https://www.zenflixapp.online/api/subscriptions"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Subscription by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/subscriptions/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "subscriptions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Subscriptions",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/subscriptions"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Subscription",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"planName\": \"Premium\"\n}"
+                        },
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/subscriptions/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "subscriptions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Subscription",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/subscriptions/:id",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "subscriptions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "User Subscriptions",
+            "item": [
+                {
+                    "name": "User Subscribe",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTk0MTAzLCJleHAiOjE3MzU5OTQ3MDN9.2KjwSwCUC6EWsyWCOKa4HsqFn2-9waBrBF_2pYULB0o",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"userId\": \"2\",\n    \"subscriptionId\": \"1\",\n    \"isAutoRenew\": true\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/user-subscriptions/subscribe"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get UserSubscription By ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "65.1.110.163:8080/api/user-subscriptions/{id}",
+                            "host": [
+                                "65",
+                                "1",
+                                "110",
+                                "163"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "user-subscriptions",
+                                "{id}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "UserSubscription ID"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All UserSubscriptions",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/user-subscriptions"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Unsubscribe",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXRoaXJmaWxlQGdtYWlsLmNvbSIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE3MzU5OTY1ODMsImV4cCI6MTczNTk5NzE4M30.MwqMG62FTlnEXw9YgxuqO6zleGonXzjDcQKFoBA0tmo",
+                                "type": "text"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/user-subscriptions/2/unsubscribe/1"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Toggle AutoRenew",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrb3ZpbmRob2ZmaWNpYWxAZ21haWwuY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MzUyMjQyMDksImV4cCI6MTczNTIyNDgwOX0.YmC6p31P3ILs8mIGu6TWZ3qABFB9ud3LZwTPoMb0LBA",
+                                "type": "text"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/user-subscriptions/5/toggle-autorenew"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Payments",
+            "item": [
+                {
+                    "name": "Get Payment by Transaction ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/payments/transaction/597322b4-c7e8-4f05-bc38-7d3cb8f0a581"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Payments ",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/payments"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Watchlist",
+            "item": [
+                {
+                    "name": "Add Video to Watchlist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB6ZW5mbGl4LmNvbSIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzM1OTk0ODgxLCJleHAiOjE3MzU5OTU0ODF9.CHNkiokWsYDf4L8lDkBU1OPFFoM5x5xjTEpll5GYaqM",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"userId\": \"2\",\n    \"videoId\": \"3\"\n}"
+                        },
+                        "url": "https://www.zenflixapp.online/api/watchlists"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Watchlist by User",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/watchlists/user/3"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove Video from Watchlist",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": "https://www.zenflixapp.online/api/watchlists/user/3/video/3"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}
